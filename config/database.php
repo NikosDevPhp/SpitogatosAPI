@@ -61,6 +61,10 @@ return [
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
+            // added to allow group by functionality, notice this has changed in mysql 5.7.5
+            'modes' => [
+                'ONLY_FULL_GROUP_BY' => false,
+                ],
         ],
 
         'pgsql' => [

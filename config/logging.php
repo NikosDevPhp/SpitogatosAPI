@@ -99,6 +99,13 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        'queries' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/queries.log'),
+            'level' => 'debug',
+            'formatter' => \Monolog\Formatter\JsonFormatter::class
+        ],
     ],
 
 ];
