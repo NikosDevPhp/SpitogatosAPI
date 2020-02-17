@@ -24,13 +24,14 @@ class CacheFullResponse
 
     /**
      * Cache the content of the response at the end of lifecycle
+     * caches only 200 status responses
      * @param $request
      * @param $response
      */
     public function terminate($request, $response)
     {
         $key = 'response_' . Str::slug($request->fullUrl() . implode('.', $request->all()));
-        if (!Cache::has($key)) {
+        if (!Cache::has($key) && $response->status() === '200') {
             Cache::put($key, $response->getContent(), 3600);
         }
     }

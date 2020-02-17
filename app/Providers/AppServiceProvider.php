@@ -27,11 +27,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // observer when save model
         Listing::observe(ListingObserver::class);
-//        DB::listen(function ($query) {
-//            Log::channel('queries')->info(
-//                implode(',', $query->bindings)
-//            );
-//        });
+
+        // listener for every query (when not cached response)
+        DB::listen(function ($query) {
+            Log::channel('queries')->info(
+                implode(',', $query->bindings)
+            );
+        });
     }
 }
