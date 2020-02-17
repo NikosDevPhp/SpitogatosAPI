@@ -33,7 +33,8 @@ class AppServiceProvider extends ServiceProvider
         // listener for every query (when not cached response)
         DB::listen(function ($query) {
             Log::channel('queries')->info(
-                implode(',', $query->bindings)
+                implode(',', $query->bindings) . ',' .
+                $query->sql
             );
         });
     }

@@ -23,10 +23,11 @@ class ListingsController extends Controller
         $input = $request->all();
 
         // return cached response if available and log response
-        $key = 'response_' . Str::slug($request->fullUrl() . implode(',', $input));
+        $key = 'response_' . Str::slug($request->fullUrl() . implode(',', $request->all()));
         if (Cache::has($key)) {
             Log::channel('queries')->info(
-                implode(',', $input)
+                implode(',', $request->all()) . ',' .
+                'from Cache'
             );
             return response()->json(
                 json_decode(Cache::get($key), true)

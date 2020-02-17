@@ -31,7 +31,7 @@ class CacheFullResponse
     public function terminate($request, $response)
     {
         $key = 'response_' . Str::slug($request->fullUrl() . implode('.', $request->all()));
-        if (!Cache::has($key) && $response->status() === '200') {
+        if (!Cache::has($key) && $response->status() === 200) {
             Cache::put($key, $response->getContent(), 3600);
         }
     }

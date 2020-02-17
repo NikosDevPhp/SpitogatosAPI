@@ -13,10 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
 
 Route::middleware(['cache.full.response', 'cors'])->group(function() {
     Route::post('search', 'ListingsController@getSearchResults');
 });
+
+////test with no cache enabled
+//Route::middleware(['cors'])->group(function() {
+//    Route::post('search', 'ListingsController@getSearchResults');
+//});
